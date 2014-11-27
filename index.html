@@ -1,0 +1,88 @@
+<!DOCTYPE	html>	
+<html>	
+	<head>	
+			<link	rel="stylesheet"	href="http://localhost/mobile_web/jquery.mobile-1.4.4/jquery.mobile-1.4.4.min.css">	
+			<script	src="http://localhost/mobile_web/jquery-1.11.1.min.js"></script>	
+			<script	src="http://localhost/mobile_web/jquery.mobile-1.4.4/jquery.mobile-1.4.4.min.js"></script>
+			
+			<script>	
+				//makes a synchronous call to the page u and return the result as object
+				function syncAjax(u){
+						var obj=$.ajax(
+							{url:u,
+							 async:false
+							 }
+						);
+						console.log(obj.responseText)
+						return $.parseJSON(obj.responseText);	
+				}
+				
+					/** rmakes an ajax call to the database , returns the trip details and 
+					          displays it in the html body below**/
+					$(document).on("pageshow", function(event, data) {
+					$id=1;
+					var u="http://localhost/mobile_web/ash_transit/ash_transit_action.php?cmd=1&n="+$id;					
+					console.log(u);
+					r=syncAjax(u);
+					$('#date').html(r.trip.date);
+					$('#trip_name').val(r.trip.trip_name);
+					$('#departure_time').val(r.trip.departure_time);
+					$('#current_location').text(r.trip.last_stop);
+					$('#next_location').text(r.trip.next_stop);
+					$('#last_stop_time').val(r.trip.last_bus_stop_time);
+					$('#next_stop_time').val(r.trip.next_bus_stop_time);
+					
+				});
+				
+					
+    </script>
+	</head>	
+
+	<body >	
+		<!-- This page contains jquery codes that display trip details -->
+		<div data-role="page" id="homepage" >	
+		<!-- This is an header for the page -->
+		<div data-role="header" data-position="fixed">		
+				<h1>ASH TRANSPORTER</h1>
+				<div data-role="navbar" data-position="fixed">
+					<ul>	
+						<li><a href="#" data-transition="slide" data-icon="home" data-iconpos="left">Trip Details</a></li>
+					</ul>
+				</div>
+		</div>
+		<!-- the main body, where the trip details are displayed, using input boxes and labels-->
+		<div data-role="main" class="ui-content">
+				<div  id="date" align="right"></div>
+				<label for="name">Trip Name</label>
+				<input type="text" id="trip_name"  readonly>
+				<div> 
+					<label for="departure_time">Departure Time</label>
+					<input type="text" id="departure_time" readonly>
+				</div>
+				
+				<table border="0" align="CENTER" cellspacing="0" width="100%">
+				<tr>
+				<td>
+				<div > 
+					<label for="lblcur">Current transit location</label>
+					<label for="current_location" id="current_location"></label>
+					<input type="text" id="last_stop_time"  readonly>
+				</div>
+				</td>
+				<td>
+				<div style = "float:left;">
+					<label for="lblnext">Next transit location</label>
+					<label for="next_location" id="next_location">Next Stop</label>
+					<input type="text" id="next_stop_time"  readonly>
+				</div>
+				</td>
+				</tr>
+				</table>
+		</div>	
+		<!-- This is a footer -->
+			<div data-role="footer" data-position="fixed" >	
+					<h1>Droid-Ventors@AshSoftEng2014</h1>
+			</div>	
+		</div>
+	</body>	
+</html>	
