@@ -1,0 +1,102 @@
+<!DOCTYPE	html>	
+<html>	
+	<head>	
+			<link	rel="stylesheet"	href="http://localhost/mobile_web/jquery.mobile-1.4.4/jquery.mobile-1.4.4.min.css">	
+			<script	src="http://localhost/mobile_web/jquery-1.11.1.min.js"></script>	
+			<script	src="http://localhost/mobile_web/jquery.mobile-1.4.4/jquery.mobile-1.4.4.min.js"></script>
+			
+			<script>	
+				//makes a synchronous call to the page u and return the result as object
+				function syncAjax(u){
+						var obj=$.ajax(
+							{url:u,
+							 async:false
+							 }
+						);
+						console.log(obj.responseText)
+						return $.parseJSON(obj.responseText);	
+				}
+				
+				
+				//gets values of date, time picker, inputboxes and stores it in the database by making an ajax call
+					function update_trip(){
+					var td=document.getElementById("tripdate").value;
+					var tn=document.getElementById("tripname").value;
+					var st=document.getElementById("starttime").value;
+					var cl=document.getElementById("curtranslocation").value;
+					var lst=document.getElementById("laststoptime").value;
+					var nl=document.getElementById("nexttranslocation").value;
+					var nst=document.getElementById("nextstoptime").value;
+					var u="http://localhost/mobile_web/ash_transit_admin/ash_transit_action.php?cmd=2&id=1&cd="+td+"&tn="+tn+"&dt="+st+"&cs="+cl+"&ct="+lst+"&ns="+nl+"&nt="+nst;	
+					r=syncAjax(u);					
+				}	
+		
+    </script>
+	</head>	
+
+	<body >	
+	<!--- This is the html page where values of date, time pickers and input boxes can be set!--->
+		<div data-role="page" id="homepage" >	
+			<div data-role="header" data-position="fixed">		
+				<h1>ASH TRANSPORTER</h1>
+				<div data-role="navbar" data-position="fixed">
+					<ul>	
+						<li><a href="#" data-transition="slide" data-icon="home" data-iconpos="left">Trip Details</a></li>
+					</ul>
+				</div>
+			</div>
+			<!--- This is the body of the page!--->
+		<div data-role="main" class="ui-content">
+				<form method="post" action="demoform.asp">
+				<label for="name">Trip date </label>
+				<input type="date" id="tripdate" >
+				
+				<label for="day">Trip name</label>
+				<select name="category" id="tripname">
+					<option value="Ashesi-Ctk">Ashesi - Ctk</option>
+					<option value="Ctk-Ashesi">Ctk - Ashesi</option>
+				</select>	
+				<label for="Extra_info">Departure time</label>
+				<input type="time" id="starttime" >
+				
+				<table border="0" align="CENTER" cellspacing="0" width="100%">
+				<tr>
+				<td>
+				<div >
+				<label for="curlocation">Current transit location</label>
+				<select name="category" id="curtranslocation">
+					<option value="spanner">Spanner Junction</option>
+					<option value="atomic">Atomic junction</option>
+				</select>
+				
+				<label for="laststoptime">last bus-stop time</label>
+				<input type="time" id="laststoptime" >
+				</div>
+				</td>
+				<td>
+				<div >
+				<label for="nextlocation">Next transit location</label>
+				<select name="category" id="nexttranslocation">
+					<option value="spanner">Spanner Junction</option>
+					<option value="atomic">Atomic junction</option>
+				</select>
+				
+				<label for="nextstoptime">Next bus-stop time</label>
+				<input type="time" id="nextstoptime" >
+				</div>
+				</td>
+				</tr>
+				</table>
+				<div >
+				<input type="button" value="Update my passengers" data-icon="check" id="send" onClick="update_trip()">
+				</div>
+			</form>	
+
+		</div>	
+		<!---This is a footer!--->
+			<div data-role="footer" data-position="fixed" >	
+					<h1>Droid-Ventors@AshSoftEng2014</h1>
+			</div>	
+		</div>
+	</body>	
+</html>	
