@@ -1,0 +1,67 @@
+ <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <link rel = "stylesheet" href = "jquery.mobile-1.4.4/jquery.mobile-1.4.4.min.css">
+            <script src = "jquery.mobile-1.4.4/jquery-1.11.1.min.js"></script>
+        <script src = "jquery.mobile-1.4.4/jquery.mobile-1.4.4.min.js"></script>
+        
+    
+     <script type="text/javascript" src="function.js"></script>
+
+      <meta name="viewport" content="width=device-width,initial-scale=1"></meta>
+      
+     </head>   
+
+
+    <body>
+
+        
+    	<div data-role="page" data-theme="b">
+    <div data-role="header">
+
+    <h1> ASH_TRANSIT</h1>
+    </div>
+     <div data-role="collapsible" >
+
+<!-- sets name for the trip -->
+<h1>Trip Details</h1>
+<div data-role="content">
+
+<div class="ui-select" id="day-button" class="ui-btn ui-icon-carat-d ui-btn-icon-right ui-corner-all ui-shadow">
+                                 <select name="day" id="tripname" data-native-menu="false">
+                                 <option value="CTK-ASH">CTK-ASH</option>
+                                 <option value="ASH-CTK">ASH-CTK</option>
+                  
+                                </select></div>
+
+
+            
+    
+    </div>
+
+    <!-- sets bus type and seats available -->
+      <div data-role="collapsible" >
+<h1>Seat Details</h1>
+            <div data-role="content">
+
+     <div class="ui-select" id="day-button" class="ui-btn ui-icon-carat-d ui-btn-icon-right ui-corner-all ui-shadow">
+                                 <select name="day" id="busSize" data-native-menu="false">
+                                 <option value="Big Bus">Big Bus</option>
+                                 <option value="Small Bus">Small Bus </option>
+                  
+                                </select></div>
+       <label for="tCapacity">Today's actual capacity:</label>
+                             <input type="text" name="tCapacity" id="tCapacity">
+  
+   <label for="available">Number of seats available:</label>
+                             <input type="text" name="available" id="available">
+                              <!-- saves details entered -->
+    <button id="save"  onclick="refresh()" width="10%">Save</button>
+    
+</div>
+    </div>
+
+    </div>
+  </body>
+  </html>
