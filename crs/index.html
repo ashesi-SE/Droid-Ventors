@@ -1,0 +1,213 @@
+<!DOCTYPE	html>	
+<html>	
+	<head>	
+			
+			<link	rel="stylesheet"	href="http://50.63.128.135/~csashesi/class2015/adekunle-ogundele/CRS/jquery.mobile-1.4.4.min.css" />	
+			<script	src="http://50.63.128.135/~csashesi/class2015/adekunle-ogundele/CRS/jquery-1.11.1.min.js"></script>	
+			<script	src="http://50.63.128.135/~csashesi/class2015/adekunle-ogundele/CRS/jquery.mobile-1.4.4.min.js"></script>	
+			<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script> 
+			
+			<script>	
+				var geocoder;
+				 if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
+				} 
+				//Get the latitude and the longitude;
+				function successFunction(position) {
+					var lat = position.coords.latitude;
+					var lng = position.coords.longitude;
+					codeLatLng(lat, lng)
+				}
+				function errorFunction(){
+					alert("Geocoder failed");
+				}
+				function initialize() {
+					geocoder = new google.maps.Geocoder();
+				}
+				function codeLatLng(lat, lng) {
+					var latlng = new google.maps.LatLng(lat, lng);
+					geocoder.geocode({'latLng': latlng}, function(results, status) {
+					  if (status == google.maps.GeocoderStatus.OK) {
+					  console.log(results)
+						if (results[1]) {
+						 //formatted address
+						 $("#location").val(results[0].formatted_address );
+						//find country name
+							 for (var i=0; i<results[0].address_components.length; i++) {
+							for (var b=0;b<results[0].address_components[i].types.length;b++) {
+							//there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
+								if (results[0].address_components[i].types[b] == "administrative_area_level_1") {
+									//this is the object you are looking for
+									city= results[0].address_components[i];
+									break;
+								}}}}
+						else {
+						  $("#location").val("No results found");
+						}}
+						else {
+						  $("#location").val("Geocoder failed due to: " + status);}});
+				}
+			
+				//makes a synchronous call to the page u and return the result as object
+				function syncAjax(u){
+						var obj=$.ajax(
+							{url:u,
+							 async:false
+							 }
+						);
+						console.log(obj.responseText)
+						return $.parseJSON(obj.responseText);	
+				}
+					
+				function add_complaint(){
+					var na=document.getElementById("name").value;
+					var ca=document.getElementById("category").value;
+					var is=document.getElementById("issue").value;
+					var lo=document.getElementById("location").value;
+					
+					if(!na.match(/\S/) || !ca.match(/\S/) || !is.match(/\S/)){
+						$("#status").fadeTo(500, 1, function() { $(this).html("Complaint cannot be sent, Please fill all the neccessary fields").fadeTo(7000, 0, function() { $(this).hide() } ); })
+						$("#name").val(" ");
+						$("#category").val(" ");
+						$("#issue").val(" ");
+						$("#location").val(" ");
+					}
+					
+					else{
+						var u="http://50.63.128.135/~csashesi/class2015/adekunle-ogundele/CRS/crs_action.php?cmd=1&na="+na+"&ca="+ca+"&is="+is+"&lo="+lo;	
+						$("#status").fadeTo(500, 1, function() { $(this).html("Complaints have been successfully Sent").fadeTo(7000, 0, function() { location.href='#homepage'} ); })
+						$("#name").val(" ");
+						$("#category").val(" ");
+						$("#issue").val(" ");
+						r=syncAjax(u);
+					}
+				}	
+	
+    </script>
+	</head>	
+
+	<body onload="initialize()">	
+	<div data-role="page" id="homepage" data-theme="b">	
+			<div data-role="header" data-position="fixed" data-theme="b">			
+				<div data-role="navbar"data-position="fixed"><ul><li><a href="#" ><img src="ireport.jpg" alt="iReport" width="200" height="60"/></a></li></ul></div>
+			</div>
+		<div data-role="main" class="ui-content" data-theme="b">
+			<div align="center">
+			<h6>Welcome to iReport, the online Issue reporting system</h6>
+			</div>
+			<div >
+			<a href="#report" data-role="button" data-icon="comment" data-iconpos="left" data-transition="slide">Report an Issue</a>
+			<a href="#reportStats" data-role="button" data-icon="bullets" data-iconpos="left" data-transition="slide">Report Statistics</a>
+			<a href="#help" data-role="button" data-icon="info" data-iconpos="left" data-transition="slide">Get Help</a>
+			</div>
+		</div>	
+			<div data-role="footer" data-position="fixed" data-theme="b">	
+					<h4>CopyRight.Cunlayogd</h4>
+			</div>	
+		</div>
+	
+	
+	
+		<div data-role="page" id="report" data-theme="b">	
+			<div data-role="header" data-position="fixed" data-theme="b">
+				<div><a href="#homepage" data-role="button" data-icon="carat-l" data-inline="true" data-transition="slide">BACK</a></div>		
+				<div data-role="navbar"data-position="fixed"><ul><li><a href="#" ><a href="#" ><img src="ireport.jpg" alt="iReport" width="200" height="60"/></a></li></ul></div>
+			</div>
+		<div data-role="main" class="ui-content" data-theme="b|c">
+			<div style="color:red"><h4><strong><b>REPORT</b></strong></h4></div>
+			<h6>NB: Dear reporter, you can decide to fill in your name or report as anonymous</h6>
+			<form method="post" action="demoform.asp">
+				<label for="name"><strong>Reporter's Name</strong></label>
+				<input type="text" id="name" value="Anonymous">
+				<label for="day"><strong>Issue Category</strong></label>
+				<select name="category" id="category">
+					<option value="economy">Economy</option>
+					<option value="education">Education</option>
+					<option value="electricity">Electricity</option>
+					<option value="environment">Environment& Sanitation</option>
+					<option value="health">Health services</option>
+					<option value="police">Police Services</option>
+					<option value="road">Roads & Highways</option>
+					<option value="communication">Telecommunication</option>
+					<option value="water">Water Supply</option>
+					<option value="other">Other Issues</option>
+				</select>	
+				<label for="Extra_info"><strong>Additional information</strong></label>
+				<textarea  id="issue"></textarea>	  
+				<label for="location"><strong>Reporters Location</strong></label>
+				<input type="text" id="location" placeholder="searching for location ..." readonly>
+				<input type="button" value="Send Report" data-icon="check" id="send" onClick="add_complaint()">
+			</form>	
+			<div id="status" style="color:#FF0000" align="center"> </div>
+		</div>	
+			<div data-role="footer" data-position="fixed" data-theme="b">	
+				<h4>CopyRight.Cunlayogd</h4>
+			</div>	
+		</div>
+		
+		
+		<div  data-role="page" id="help" data-theme="b">	
+			<div data-role="header" data-position="fixed" data-theme="b">
+			<div><a href="#homepage" data-role="button" data-icon="carat-l" data-inline="true" data-transition="slide">BACK</a></div>		
+				<div data-role="navbar"data-position="fixed"><ul><li><a href="#" ><a href="#" ><img src="ireport.jpg" alt="iReport" width="200" height="60"/></a></li></ul></div>
+			</div>
+			<div role="main" class="ui-content" data-theme="a|b">
+					<div style="color:red"><h4><strong><b>HELP</b></strong></h4></div>
+					<h6>iReport allows citizens to make reports on issues going on in their locality
+				  and also gives room to see the performances of every sector of the economy, wether they are performing
+				  excellent or poor<br><br>Click on the below to get more information on how to navigate through the App</h6>
+					<div data-role="collapsible">
+					<h1>Report an Issue</h1>
+					<div style="font-size:80%">
+					<p>Click on the "Report an Issue" button to report issue</p>
+					<p>Reporters may decide to report issue as Anonymous or enter their name if they are comfortable with it</p>
+					<p>Issues are categorized, reporter has to select an issue category</p>
+					<p>Reporter can give additional information to describe the report</p>
+					<p>Reporters location cannot be edited, and its generated based on reporters location</p>
+					<p>Click on the "Send Report" button to send report</p>
+					</div>
+					</div>
+					
+					<div data-role="collapsible">
+					<h1>Report Statistics</h1>
+					<div style="font-size:80%">
+					<p>Report Stats provides a summary of issues reported in each sector of the country, telling citizens how effective or ineffective the sector is</p6>
+					<p>Click on the "Report Statistics" button on the homepage</p>
+					<p>Select action from the issues category listed</p>
+					<p>Then User obtains useful information</p>
+					</div>
+					</div>
+			</div>
+			<div data-role="footer" data-position="fixed" data-theme="b">	
+				<h4>CopyRight.Cunlayogd</h4>
+			</div>	
+		</div>
+		
+		<div  data-role="page" id="reportStats" data-theme="b">	
+			<div data-role="header" data-position="fixed" data-theme="b">		
+				<div><a href="#homepage" data-role="button" data-icon="carat-l" data-inline="true" data-transition="slide">BACK</a></div>		
+				<div data-role="navbar"data-position="fixed"><ul><li><a href="#" ><a href="#" ><img src="ireport.jpg" alt="iReport" width="200" height="60"/></a></li></ul></div>
+			</div>
+			<div role="main" class="ui-content" data-theme="a|b">
+				<div style="color:red"><h4><strong><b>CATEGORY MENU</b></strong></h4></div><br>
+				<div data-role="menu">
+					<ul data-role="listview" id="ml">
+						<li><a href="http://50.63.128.135/~csashesi/class2015/adekunle-ogundele/CRS/report_details.php?name=communication" rel="external" data-ajax="false">Communication and Information</a></li>
+						<li><a href="http://50.63.128.135/~csashesi/class2015/adekunle-ogundele/CRS/report_details.php?name=economy" rel="external" data-ajax="false">Economy</a></li>
+						<li><a href="http://50.63.128.135/~csashesi/class2015/adekunle-ogundele/CRS/report_details.php?name=education" rel="external" data-ajax="false">Education</a></li>
+						<li><a href="http://50.63.128.135/~csashesi/class2015/adekunle-ogundele/CRS/report_details.php?name=electricity" rel="external" data-ajax="false">Electricity Commission</a></li>
+						<li><a href="http://50.63.128.135/~csashesi/class2015/adekunle-ogundele/CRS/report_details.php?name=environment" rel="external" data-ajax="false">Environment and Sanitation</a></li>
+						<li><a href="http://50.63.128.135/~csashesi/class2015/adekunle-ogundele/CRS/report_details.php?name=health" rel="external" data-ajax="false">Health Service</a></li>
+						<li><a href="http://50.63.128.135/~csashesi/class2015/adekunle-ogundele/CRS/report_details.php?name=police" rel="external" data-ajax="false">Police Service</a></li>
+						<li><a href="http://50.63.128.135/~csashesi/class2015/adekunle-ogundele/CRS/report_details.php?name=road" rel="external" data-ajax="false">Roads and Highway</a></li>
+						<li><a href="http://50.63.128.135/~csashesi/class2015/adekunle-ogundele/CRS/report_details.php?name=water" rel="external" data-ajax="false">Water Corporation</a></li>
+						<li><a href="http://50.63.128.135/~csashesi/class2015/adekunle-ogundele/CRS/report_details.php?name=other" rel="external" data-ajax="false">Other Issues</a></li>	
+					</ul>
+				</div>	
+			</div>
+			<div data-role="footer" data-position="fixed" data-theme="b">	
+				<h4>CopyRight.Cunlayogd</h4>
+		</div>
+		</div>		
+	</body>	
+</html>	
