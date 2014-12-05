@@ -4,8 +4,16 @@ include("gen.php");
 	//echo "are u called";
 switch($cmd){
 		case 1:
-                //updates a user in the system to a conductor 
+                //gets all the child welfare details including the fullname
                 updateConductor();
+                break;
+                case 2:
+                //gets all the child welfare details including the fullname
+                updateTime();
+                break;
+                  case 3:
+                //gets all the child welfare details including the fullname
+                viewBooking();
                 break;
             default:
 			echo "{";
@@ -38,5 +46,54 @@ switch($cmd){
 		echo'{"result":1,"message":"Update was Successful"}';
         }
         
+        
+          /** php fucntion automatically updates the pick up points**/
+        function updateTime(){
+             $id= get_datan('id');
+             $tt= get_data('tripname');
+             echo $id;
+             echo $tt;
+             if(!$id){
+		//display message
+			echo'{"result":0,"message":"not working"}';
+		return;
+		}
+                include ("myGroup_function.php");
+			$g=new bus();
+                        
+		if(!$g->myTime($tt,$id))
+		{
+		echo'{"result":0,"message":"unable to update"}';
+		return;
+		}
+            echo'{"result":1,"message":"One item has sucessfully been updated successfully"}';
+        }
+        
+          /** php fucntion that displays a list of all those who have booked**/
+        function viewBooking(){
+           
+            //creates an object of the growing class
+		include("myGroup_function.php");
+		//$vs=get_data("vs");
+                
+                $obj = new bus();
+			
+			//calls the querry that shows the details of a child
+			$row=$obj->listAll();
 	
+			if(!$row){
+			echo "{";
+			echo jsonn("result",0). ",";
+			echo jsons("message","Details not found");
+			echo "}";
+			return;
+		}
+                
+                 $json=array();
+                    while($row=$obj->fetch()){
+                        $json['bookings'][]=$row;  
+                    }
+                echo json_encode($json);	
+      
+        }	
 ?>

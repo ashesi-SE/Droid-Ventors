@@ -36,7 +36,119 @@
 	</script>
 </head> 
  <body>
-	<!-- This is a header!-->
+	
+   
+     
+  
+          
+      <div data-role="page" id="pagefour">
+	              	<div data-role="header" data-position="fixed">		
+				<h1>ASH TRANSIT</h1>
+				<div data-role="navbar" data-position="fixed">
+					<ul>	
+						<li><a href="#" data-transition="slide" data-icon="home" data-iconpos="left">Trip Details</a></li>
+					</ul>
+				</div>
+			</div>
+          
+          
+		
+	                  <div role="main" class="ui-content" data-position="fixed">
+                              
+                              	
+  	
+  <div data-role="collapsible">		
+  <h1>Set Time</h1>	
+ <div data-role="content">
+     <fieldset data-role="controlgroup">
+	                              
+     <label for="select-location">Select Current Location</label>
+     <select name="select-location" id="select-location">
+      
+                    <option>Select Conductor</option>
+	                <option value="1">Christ the King</option>
+	                <option value="2">37 Station</option>
+	                <option value="3">Accra Mall</option>
+                        <option value="4">Legon</option>
+	                <option value="5">Atomic Round About</option>
+	                <option value="6">Kwabenya</option>
+                        <option value="4">Abom Juction</option>
+	                <option value="5">Comet</option>
+	                <option value="9">Berekuso</option>
+                        <option value="10">Ashesi</option>
+     </select>                                 
+	</fieldset>
+     
+     
+          <fieldset data-role="controlgroup">
+	                              
+     <label for="select-trip">Trip Type</label>
+     <select name="select-trip" id="select-trip">
+        <option>Trip Type</option>
+        <option value="Ashesi-Christ the King">Ashesi-Christ the King</option>
+        <option value="Christ the King-Ashesi">Christ the King-Ashesi</option>
+     </select>                                 
+	</fieldset>
+      <div align="center">
+	<a href="#" data-role="button" data-inline="true" onclick="updateTime()"> Set Time</a>
+      </div>
+  </div>
+
+             
+    </div>
+ 
+  
+ <div data-role="collapsible">		
+  <h1>Booking List</h1>	
+ <div data-role="content">
+     
+               <div align="center">
+			<a href="#pagethree" data-role="button" data-inline="true" onclick="mylsit()"> View Reservations List</a>
+               </div>
+  </div>
+ </div>
+	</div> 				
+                    <div data-role="footer" data-position="fixed">
+                        <h3>Droid-Ventors@AshSoftEng2014</h3>	
+                    </div>
+	
+	</div>		
+     
+     
+     
+          
+         <div data-role="page" id="pagethree">
+	              	<div data-role="header" data-position="fixed">		
+				<h1>ASH TRANSIT</h1>
+				<div data-role="navbar" data-position="fixed">
+					<ul>	
+						<li><a href="#" data-transition="slide" data-icon="home" data-iconpos="left">Trip Details</a></li>
+					</ul>
+				</div>
+			</div>
+		
+	                  <div role="main" class="ui-content" data-position="fixed">
+            
+            
+            <ul data-role="listview" id="listview">
+				
+		<li data-role="list-divider">
+                    
+                </li>
+				
+            </ul>
+         </div>
+					
+					<div data-role="footer" data-position="fixed">
+						<h3>Droid-Ventors@AshSoftEng2014</h3>	
+					</div>
+	
+			</div> 
+
+     
+     
+     
+     <!-- This is a header!-->
 	 <div data-role="page" id="pagetwo">
 	              	<div data-role="header" data-position="fixed">		
 				<h1>ASH TRANSFORMERS</h1>
@@ -77,6 +189,8 @@
 					</div>
 	
 			</div> 
-
+     
+     
+     
 </body>
 </html>
