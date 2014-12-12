@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="jquery.mobile-1.4.4.min.css">
+	<script src="jquery-1.11.1.js"></script>
+        <script>src="schscript.js"</script>
+	<script src="jquery.mobile-1.4.4.min.js"></script>
+
+	<script>
+	
+			function syncAjax(u){
+				var obj=$.ajax(
+					{url:u,
+					 async:false
+					 }
+				);
+				return $.parseJSON(obj.responseText);
+				
+			}
+	
+		/* 
+			this javascript method gets the user id from an html dropdown
+			passes the id by making an Ajax call to call the update_fucntion
+		*/
+		function changeConductor(){
+			var idd=$("#select-conductor").val();
+		console.log(idd);
+				
+			var u="ash_transit_action.php?cmd=1&id="
+				+idd;
+				alert(u);
+				var r=syncAjax(u);
+                                console.log(r);
+				//location.reload();
+		}
+	</script>
+</head> 
+ <body>
+	
+   
+     
+  
+          
+      <div data-role="page" id="pagefour">
+	              	<div data-role="header" data-position="fixed">		
+				<h1>ASH TRANSIT</h1>
+				<div data-role="navbar" data-position="fixed">
+					<ul>	
+						<li><a href="#" data-transition="slide" data-icon="home" data-iconpos="left">Trip Details</a></li>
+					</ul>
+				</div>
+			</div>
+          
+          
+		
+	                  <div role="main" class="ui-content" data-position="fixed">
+                              
+                              	
+  	
+  <div data-role="collapsible">		
+  <h1>Set Time</h1>	
+ <div data-role="content">
+     <fieldset data-role="controlgroup">
+	                              
+     <label for="select-location">Select Current Location</label>
+     <select name="select-location" id="select-location">
+      
+                    <option>Select Conductor</option>
+	                <option value="1">Christ the King</option>
+	                <option value="2">37 Station</option>
+	                <option value="3">Accra Mall</option>
+                        <option value="4">Legon</option>
+	                <option value="5">Atomic Round About</option>
+	                <option value="6">Kwabenya</option>
+                        <option value="4">Abom Juction</option>
+	                <option value="5">Comet</option>
+	                <option value="9">Berekuso</option>
+                        <option value="10">Ashesi</option>
+     </select>                                 
+	</fieldset>
+     
+     
+          <fieldset data-role="controlgroup">
+	                              
+     <label for="select-trip">Trip Type</label>
+     <select name="select-trip" id="select-trip">
+        <option>Trip Type</option>
+        <option value="Ashesi-Christ the King">Ashesi-Christ the King</option>
+        <option value="Christ the King-Ashesi">Christ the King-Ashesi</option>
+     </select>                                 
+	</fieldset>
+      <div align="center">
+	<a href="#" data-role="button" data-inline="true" onclick="updateTime()"> Set Time</a>
+      </div>
+  </div>
+
+             
+    </div>
+ 
+  
+ <div data-role="collapsible">		
+  <h1>Booking List</h1>	
+ <div data-role="content">
+     
+               <div align="center">
+			<a href="#pagethree" data-role="button" data-inline="true" onclick="mylsit()"> View Reservations List</a>
+               </div>
+  </div>
+ </div>
+	</div> 				
+                    <div data-role="footer" data-position="fixed">
+                        <h3>Droid-Ventors@AshSoftEng2014</h3>	
+                    </div>
+	
+	</div>		
+     
+     
+     
+          
+         <div data-role="page" id="pagethree">
+	              	<div data-role="header" data-position="fixed">		
+				<h1>ASH TRANSIT</h1>
+				<div data-role="navbar" data-position="fixed">
+					<ul>	
+						<li><a href="#" data-transition="slide" data-icon="home" data-iconpos="left">Trip Details</a></li>
+					</ul>
+				</div>
+			</div>
+		
+	                  <div role="main" class="ui-content" data-position="fixed">
+            
+            
+            <ul data-role="listview" id="listview">
+				
+		<li data-role="list-divider">
+                    
+                </li>
+				
+            </ul>
+         </div>
+					
+					<div data-role="footer" data-position="fixed">
+						<h3>Droid-Ventors@AshSoftEng2014</h3>	
+					</div>
+	
+			</div> 
+
+     
+     
+     
+     <!-- This is a header!-->
+	 <div data-role="page" id="pagetwo">
+	              	<div data-role="header" data-position="fixed">		
+				<h1>ASH TRANSFORMERS</h1>
+				<div data-role="navbar" data-position="fixed">
+					<ul>	
+						<li><a href="#" data-transition="slide" data-icon="home" data-iconpos="left">Trip Details</a></li>
+					</ul>
+				</div>
+			</div>
+		
+					<!-- This is the main body it includes a dropdown  and a submit butto that calls the chage_condutor function-->
+	                 <div role="main" class="ui-content">
+	                    <form>
+	                        <div data-role="fieldcontain" align="center">
+	                             <fieldset data-role="controlgroup">
+	                              
+	                                 <label for="select-conductor">Select Conductor</label>
+	                                 <select name="select-conductor" id="select-conductor">
+	                                    <option>Select Conductor</option>
+	                                    <option value="1">Anna Reimah</option>
+	                                    <option value="2">Nina Pearls</option>
+	                                    <option value="3">Daniel Botwe</option>
+	                                    <!-- etc. -->
+	                                 </select>
+	                                 
+	                            </fieldset>
+	                        </div>
+
+	                         <div align="center">
+								<label for="submit" ></label>
+								<input type="button" name="submit" value="Save" data-inline="true" onclick="changeConductor()"/>
+	                         </div>
+	   `				 </form>
+					</div>
+					
+					<div data-role="footer" data-position="fixed">
+						<h3>Droid-Ventors@AshSoftEng2014</h3>	
+					</div>
+	
+			</div> 
+     
+     
+     
+</body>
+</html>
