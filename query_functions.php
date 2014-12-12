@@ -19,6 +19,42 @@
 			}
 			return $this->fetch();
 		}
+
+		function getCurReport(){
+			$query="select * from tripdetails where date=CURDATE()";
+			return $this->query($query);
+		}
+
+		function getReport(){
+			$query="select * from tripdetails";
+			return $this->query($query);
+		}
+
+		function getReservations(){
+			$query="select * from bookingdetails";
+			return $this->query($query);
+		}
+
+		function update_conductor($id){
+			$conductor="conductor";
+			$passenger="passenger";
+				
+			$query = "update users set role ='$passenger' where role='$conductor'";
+				
+				
+				if(!$this->query($query))
+				{
+					return false;
+				}
+				$query = "update users set role ='$conductor' where ash_id=$id";
+			        if(!$this->query($query))
+				{
+					return false;
+				}
+					return $this->query($query);
+				
+				
+		}
 	}
 		
 ?>
