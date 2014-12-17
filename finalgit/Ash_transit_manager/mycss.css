@@ -1,0 +1,23 @@
+body { 
+    background-image: url('bg1.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.theWidth {
+  width: 1000px;
+}
+
+.thewwidth {
+  width: 600px;
+}
+
+.front {
+	background-color: black;
+	font: white;
+}
+
+.back {
+	background-color: white;
+	font: black;
+}

@@ -1,0 +1,103 @@
+<html>
+	
+
+	<head>
+		<title>Ash-Transit</title>
+		<script src="semantic.js"></script>
+		<script src="semantic.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="semantic.css">
+		<link rel="stylesheet" type="text/css" href="mycss.css">
+		<script src = "jquery-1.11.1.min.js"></script>
+		<script type = "text/javascript" src = "functions.js"></script>
+		<link rel="stylesheet" type="text/css" href="semantic.min.css">
+	</head>
+
+	<body style="background-color:#330000">
+		<br>
+		<div align="center">
+			<img src="bustransit.png" width="300" height="150"/>
+			<div class="theWidth">
+				<br>
+		<div align="center" class="ui red menu">
+					  <a href="manager.html" class="item">
+					    <i class="home icon"></i>Home</a>
+					    <a href="managerRegister.html" class="item">
+					    <i class="users icon"></i>Register New User</a>
+					  <a href="managerReport.html" class="active item">
+					    <i class="bookmark icon"></i>View Reports</a>
+					</div>
+
+					<div align="left" class="ui raised segment">
+			<a class="ui red ribbon label"><font size="5">Report Page</font></a>
+			<br>
+			<br>
+			<script>
+				$(document).ready(function(){
+
+    				loadCurrentReport();
+    				
+    				});
+			</script>
+					<br>
+					<br>
+		  			<p><b>Today's Report</b></p>
+
+		  			<table class="ui table">
+					  <thead>
+					    <tr>
+					      <th>Trip Name</th>
+					      <th>Departure Time</th>
+					      <th>Capacity</th>
+					      <th>Reservations</th>
+					    </tr>
+					  </thead>
+					  <tbody id="current_report">
+					  </tbody>
+					</table>
+
+					<br>
+					<br>
+		  			<p><b>All Reports</b></p>
+
+		  			<table class="ui table">
+					  <thead>
+					    <tr>
+					      <th>Trip Name</th>
+					      <th>Departure Time</th>
+					      <th>Capacity</th>
+					      <th>Reservations</th>
+					    </tr>
+					  </thead>
+					  <tbody id="reports">
+					  </tbody>
+					</table>
+
+					<br>
+					<br>
+		  			<p><b>List of Reservations</b></p>
+
+		  			<table class="ui table">
+					  <thead>
+					    <tr>
+					      <th>Date</th>
+					      <th>Name & Contact</th>
+					      <th>Trip</th>
+					      <th>Pick Up Point</th>
+					      <th>Seat #</th>
+					    </tr>
+					  </thead>
+					  <tbody id="res">
+					  </tbody>
+					</table>
+
+					</div>
+					<br>
+					<br>
+				</div>
+			</div>
+			<br><br>
+			<div align="center">
+			<font color="white">Copyright &copy; Developed By: Droid-Ventors 2014</font></div><br>
+	</body>
+
+</html>

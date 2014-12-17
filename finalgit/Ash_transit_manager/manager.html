@@ -1,0 +1,69 @@
+<html>
+	
+
+	<head>
+		<title>Ash-Transit</title>
+		<script src="semantic.js"></script>
+		<script src="semantic.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="semantic.css">
+		<link rel="stylesheet" type="text/css" href="mycss.css">
+		<script src = "jquery-1.11.1.min.js"></script>
+		<script type = "text/javascript" src = "functions.js"></script>
+		<link rel="stylesheet" type="text/css" href="semantic.min.css">
+	</head>
+
+	<body style="background-color:#330000">
+		<br>
+		<div align="center">
+			<img src="bustransit.png" width="300" height="150"/>
+			<div class="thewwidth">
+				<br>
+					<div align="center" class="ui red menu">
+					  <a href="manager.html" class="active item">
+					    <i class="home icon"></i>Home</a>
+					    <a href="managerRegister.html" class="item">
+					    <i class="users icon"></i>Register New User</a>
+					  <a href="managerReport.html" class="item">
+					    <i class="bookmark icon"></i>View Reports</a>
+					</div>
+					<br>
+					<br>
+
+		  			<div class="ui form segment">
+
+		  				<script>
+				$(document).ready(function(){
+
+    				loadUsers();
+    				
+    				});
+			</script>
+
+		  					<p>Select Your Conductor For Today</p>
+							  <select name="select-conductor" id="allUsers">
+	                                     <option>Select Conductor</option>
+                                             <!-- <option value="1234">Anna Reimah</option>
+                                             <option value="5678">Nina Pearls</option> -->
+                                            
+	                                    <!-- etc. -->
+	                                 </select>
+	                                 
+	                            <!-- </fieldset> -->
+	                            <br>
+	                            <br>
+	                            <div align="center">
+	                            	<div class="ui blue submit button" onclick="changeConductor()"><i class="check mark icon"></i>
+	                            		Save Conductor</div>
+	                            		<br><br>
+	                            		<div id="status" align="center"></div>
+	                         </div>
+	                        </div>
+						</div>
+				</div>
+			</div>
+			<br><br>
+			<div align="center">
+			<font color="white">Copyright &copy; Developed By: Droid-Ventors 2014</font></div><br>
+	</body>
+
+</html>
